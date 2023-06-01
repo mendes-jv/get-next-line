@@ -12,31 +12,65 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *str)
+void	ft_lstadd_back(t_list **lst, t_list *node)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	if (!*lst)
+	{
+		*lst = node;
+		return ;
+	}
+	while ((*lst)->next)
+		*lst = (*lst)->next;
+	(*lst)->next = node;
 }
 
-char	*ft_strchr(const char *str, int c)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	char	*first;
+	t_list	*temp_node;
 
-	first = NULL;
-	while (*str)
+	while (*lst)
 	{
-		if (*str == (unsigned char)c)
-		{
-			first = (char *)str;
-			break ;
-		}
-		str++;
+		temp_node = *lst;
+		*lst = (*lst)->next;
+		ft_lstdelone(temp_node, del);
 	}
-	if (!c || *str == (unsigned char)c)
-		first = (char *)str;
-	return (first);
+}
+
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
+{
+	t_list	*temp_node;
+
+	if (!lst || !del)
+		return ;
+	temp_node = lst;
+	del(temp_node->content);
+	lst = lst->next;
+	free(temp_node);
+}
+
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*node;
+
+	node = malloc(sizeof(t_list));
+	if (!node)
+		return (NULL);
+	node->content = content;
+	node->next = NULL;
+	return (node);
+}
+
+size_t	ft_lstsize(t_list *lst)
+{
+	size_t	index;
+	t_list	*node;
+
+	index = 0;
+	node = lst;
+	while (node)
+	{
+		node = node->next;
+		index++;
+	}
+	return (index);
 }
