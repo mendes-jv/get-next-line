@@ -14,76 +14,17 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
-	t_list		*buffers;
 	char		*line;
-
-	read(fd, buffer, BUFFER_SIZE);
-	buffers = ft_lstnew(buffer);
-	while (ft_strchr(buffer, '\n') && read(fd, buffer, BUFFER_SIZE))
-		ft_lstadd_back(&buffers, ft_lstnew(buffer));
-	line = ft_lstmapstr(buffers, ft_strcat);
-	ft_lstclear(&buffers, &free);
+	static char	*buffer;
+	
+	line = ft_calloc(1, sizeof(char));
+	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	while (!ft_strchr(buffer, '\n'))
+	{
+		read(fd, buffer, BUFFER_SIZE);
+		buffer[BUFFER_SIZE] = '\0';
+		line = ft_strjoin(line, buffer);
+	}
+	buffer = ft_strchr(buffer, '\n') + 1;
 	return (line);
-}
-
-void	ft_strcat(char *dst, const char *src)
-{
-	size_t	index;
-	size_t	destiny_length;
-
-	index = 0;
-	destiny_length = ft_strlen(dst);
-	while (src[index])
-	{
-		dst[destiny_length + index] = src[index];
-		index++;
-	}
-	dst[destiny_length + index] = '\0';
-}
-
-char	*ft_strchr(const char *str, int c)
-{
-	char	*first;
-
-	first = NULL;
-	while (*str)
-	{
-		if (*str == (unsigned char)c)
-		{
-			first = (char *)str;
-			break ;
-		}
-		str++;
-	}
-	if (!c || *str == (unsigned char)c)
-		first = (char *)str;
-	return (first);
-}
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	*ft_lstmapstr(t_list *lst, void (*f)(char *, const char *))
-{
-	char	*string;
-
-	if (!lst)
-		return (NULL);
-	string = malloc(((ft_lstsize(lst) * BUFFER_SIZE) + 1) * sizeof(char));
-	if (!string)
-		return (NULL);
-	while (lst)
-	{
-		f(string, lst->content);
-		lst = lst->next;
-	}
-	return (string);
 }
