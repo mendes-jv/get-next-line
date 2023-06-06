@@ -46,14 +46,14 @@ char	*ft_strchr(const char *str, int c)
 	return (first);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
 	char	*string;
 	size_t	length;
 
 	length = ft_strlen(s1);
 	string = ft_calloc(length + ft_strlen(s2) + 1, sizeof(char));
-	if (string != NULL && s1 != NULL && s2 != NULL)
+	if (string && s1 && s2)
 	{
 		ft_strlcpy(string, s1, length + 1);
 		while (*s2)

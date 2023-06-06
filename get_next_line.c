@@ -6,7 +6,7 @@
 /*   By: jovicto2 <jovicto2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:51:51 by jovicto2          #+#    #+#             */
-/*   Updated: 2023/05/31 18:51:55 by jovicto2         ###   ########.fr       */
+/*   Updated: 2023/06/05 21:25:29 by jovicto2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,46 @@
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*buffer;
-	
-	line = ft_calloc(1, sizeof(char));
+	char		*temp_line;
+	static char	*remainder;
+
+	if (!remainder)
+		remainder = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	temp_line = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	temp_line = ft_readline(fd, remainder, temp_line);
+	line = ft_calloc(ft_linesize(temp_line) + 1, sizeof(char));
+	ft_strlcpy(line, temp_line, ft_linesize(temp_line));
+	ft_strlcpy(remainder, temp_line + ft_linesize(temp_line), BUFFER_SIZE);
+	free(temp_line);
+	return (line);
+}
+
+size_t	ft_linesize(char *string)
+{
+	size_t	index;
+
+	index = 0;
+	while (string[index] != '\n' && string[index])
+		index++;
+	return (index + 1);
+}
+
+char	*ft_readline(int fd, char *remainder, char *temp_line)
+{
+	char	*buffer;
+	char	*readed_chars;
+
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	while (!ft_strchr(buffer, '\n'))
+	if (remainder)
+		ft_strlcpy(temp_line, remainder, ft_strlen(remainder) + 1);
+	while (!ft_strchr(temp_line, '\n'))
 	{
 		read(fd, buffer, BUFFER_SIZE);
 		buffer[BUFFER_SIZE] = '\0';
-		line = ft_strjoin(line, buffer);
+		readed_chars = temp_line;
+		temp_line = ft_strjoin(readed_chars, buffer);
+		free(readed_chars);
 	}
-	buffer = ft_strchr(buffer, '\n') + 1;
-	return (line);
+	free(buffer);
+	return (temp_line);
 }

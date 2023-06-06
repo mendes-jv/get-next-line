@@ -15,12 +15,30 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
-char *get_next_line(int fd);
+char	*get_next_line(int fd);
 
-int main (void)
+int	main(void)
 {
-	int	fd;
+	int		fd;
+	char	*gnl;
 
 	fd = open("test.txt", O_RDONLY);
-	printf("%s\n", get_next_line(fd));
+	gnl = get_next_line(fd);
+	printf("%s\n", gnl);
+	free(gnl);
+	gnl = get_next_line(fd);
+	printf("%s\n", gnl);
+	free(gnl);
+	gnl = get_next_line(fd);
+	printf("%s\n", gnl);
+	free(gnl);
+	gnl = get_next_line(fd);
+	printf("%s\n", gnl);
+	free(gnl);
+	gnl = get_next_line(fd);
+	printf("%s\n", gnl);
+	free(gnl);
+	gnl = get_next_line(fd);
+	printf("%s\n", gnl);
+	free(gnl);
 }
