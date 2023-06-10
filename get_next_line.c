@@ -18,10 +18,18 @@ char	*get_next_line(int fd)
 	char		*temp_line;
 	static char	*remainder;
 
+	if (fd == -1 || BUFFER_SIZE < 1)
+		return (NULL);
 	if (!remainder)
 		remainder = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	temp_line = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	temp_line = ft_readline(fd, remainder, temp_line);
+	if (!temp_line)
+	{
+		free (remainder);
+		free (temp_line);
+		return (NULL);
+	}
 	line = ft_calloc(ft_linesize(temp_line) + 1, sizeof(char));
 	ft_strlcpy(line, temp_line, ft_linesize(temp_line));
 	ft_strlcpy(remainder, temp_line + ft_linesize(temp_line), BUFFER_SIZE);
@@ -43,13 +51,17 @@ char	*ft_readline(int fd, char *remainder, char *temp_line)
 {
 	char	*buffer;
 	char	*readed_chars;
+	int		readed_length;
 
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	readed_length = 1;
 	if (remainder)
 		ft_strlcpy(temp_line, remainder, ft_strlen(remainder) + 1);
-	while (!ft_strchr(temp_line, '\n'))
+	while (!ft_strchr(temp_line, '\n') && readed_length)
 	{
-		read(fd, buffer, BUFFER_SIZE);
+		readed_length = read(fd, buffer, BUFFER_SIZE);
+		if (!readed_length)
+			break ;
 		buffer[BUFFER_SIZE] = '\0';
 		readed_chars = temp_line;
 		temp_line = ft_strjoin(readed_chars, buffer);

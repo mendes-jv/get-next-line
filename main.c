@@ -20,25 +20,16 @@ char	*get_next_line(int fd);
 int	main(void)
 {
 	int		fd;
+	int		index;
 	char	*gnl;
 
 	fd = open("test.txt", O_RDONLY);
-	gnl = get_next_line(fd);
-	printf("%s\n", gnl);
-	free(gnl);
-	gnl = get_next_line(fd);
-	printf("%s\n", gnl);
-	free(gnl);
-	gnl = get_next_line(fd);
-	printf("%s\n", gnl);
-	free(gnl);
-	gnl = get_next_line(fd);
-	printf("%s\n", gnl);
-	free(gnl);
-	gnl = get_next_line(fd);
-	printf("%s\n", gnl);
-	free(gnl);
-	gnl = get_next_line(fd);
-	printf("%s\n", gnl);
-	free(gnl);
+	index = 9;
+	while (index--)
+	{
+		gnl = get_next_line(fd);
+		printf("%s\n", gnl);
+		free(gnl);
+	}
+	close(fd);
 }
