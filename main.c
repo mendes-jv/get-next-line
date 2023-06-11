@@ -24,11 +24,11 @@ int	main(void)
 	char	*gnl;
 
 	fd = open("test.txt", O_RDONLY);
-	index = 9;
+	index = 10;
 	while (index--)
 	{
 		gnl = get_next_line(fd);
-		printf("%s\n", gnl);
+		printf("%s", gnl);
 		free(gnl);
 	}
 	close(fd);

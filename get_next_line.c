@@ -15,25 +15,19 @@
 char	*get_next_line(int fd)
 {
 	char		*line;
-	char		*temp_line;
-	static char	*remainder;
+	char		*temp_buffer;
+	static char	*buffer;
 
 	if (fd == -1 || BUFFER_SIZE < 1)
 		return (NULL);
-	if (!remainder)
-		remainder = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	temp_line = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	temp_line = ft_readline(fd, remainder, temp_line);
-	if (!temp_line)
-	{
-		free (remainder);
-		free (temp_line);
+	buffer = ft_readline(fd, buffer);
+	if (!buffer)
 		return (NULL);
-	}
-	line = ft_calloc(ft_linesize(temp_line) + 1, sizeof(char));
-	ft_strlcpy(line, temp_line, ft_linesize(temp_line));
-	ft_strlcpy(remainder, temp_line + ft_linesize(temp_line), BUFFER_SIZE);
-	free(temp_line);
+	line = ft_calloc(ft_linesize(buffer) + 1, sizeof(char));
+	ft_strlcpy(line, buffer, ft_linesize(buffer) + 1);
+	temp_buffer = buffer;
+	buffer = ft_buffdup(temp_buffer + ft_linesize(temp_buffer));
+	free(temp_buffer);
 	return (line);
 }
 
@@ -47,26 +41,37 @@ size_t	ft_linesize(char *string)
 	return (index + 1);
 }
 
-char	*ft_readline(int fd, char *remainder, char *temp_line)
+char	*ft_readline(int fd, char *buffer)
 {
-	char	*buffer;
-	char	*readed_chars;
-	int		readed_length;
+	char	*read_buffer;
+	char	*temp_buffer;
+	ssize_t	bytes_read;
 
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	readed_length = 1;
-	if (remainder)
-		ft_strlcpy(temp_line, remainder, ft_strlen(remainder) + 1);
-	while (!ft_strchr(temp_line, '\n') && readed_length)
+	read_buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	temp_buffer = buffer;
+	bytes_read = 1;
+	while (!ft_strchr(buffer, '\n') && bytes_read)
 	{
-		readed_length = read(fd, buffer, BUFFER_SIZE);
-		if (!readed_length)
-			break ;
-		buffer[BUFFER_SIZE] = '\0';
-		readed_chars = temp_line;
-		temp_line = ft_strjoin(readed_chars, buffer);
-		free(readed_chars);
+		bytes_read = read(fd, read_buffer, BUFFER_SIZE);
+		if (bytes_read == -1)
+		{
+			free(read_buffer);
+			return (NULL);
+		}
+		temp_buffer = buffer;
+		buffer = ft_strjoin(temp_buffer, read_buffer);
+		free(temp_buffer);
 	}
-	free(buffer);
-	return (temp_line);
+	free(read_buffer);
+	return (buffer);
+}
+
+char	*ft_buffdup(char *s)
+{
+	char	*destiny;
+
+	destiny = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (destiny != NULL && s != NULL)
+		ft_strlcpy(destiny, s, BUFFER_SIZE);
+	return (destiny);
 }

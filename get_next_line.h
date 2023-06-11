@@ -23,14 +23,15 @@
 // Mandatory
 char	*get_next_line(int fd);
 size_t	ft_linesize(char *string);
-char	*ft_readline(int fd, char *remainder, char *temp_line);
+char	*ft_readline(int fd, char *temp_line);
+char	*ft_buffdup(char *s);
 
 // Mandatory utils
 void	*ft_calloc(size_t nmemb, size_t size);
-char	*ft_strchr(const char *str, int c);
-char	*ft_strjoin(const char *s1, const char *s2);
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-size_t	ft_strlen(const char *str);
+char	*ft_strchr(char *str, int c);
+char	*ft_strjoin(char *s1, char *s2);
+size_t	ft_strlcpy(char *dst, char *src, size_t size);
+size_t	ft_strlen(char *str);
 
 // Bonus
 
