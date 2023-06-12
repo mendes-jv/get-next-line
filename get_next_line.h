@@ -22,9 +22,9 @@
 
 // Mandatory
 char	*get_next_line(int fd);
-size_t	ft_linesize(char *string);
+char	*ft_buffertrim(char *buffer);
+char	*ft_getline(char *buffer);
 char	*ft_readline(int fd, char *temp_line);
-char	*ft_buffdup(char *s);
 
 // Mandatory utils
 void	*ft_calloc(size_t nmemb, size_t size);

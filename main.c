@@ -23,12 +23,15 @@ int	main(void)
 	int		index;
 	char	*gnl;
 
-	fd = open("test.txt", O_RDONLY);
-	index = 10;
+	fd = open("test", O_RDONLY);
+	index = 2;
 	while (index--)
 	{
 		gnl = get_next_line(fd);
-		printf("%s", gnl);
+		if (gnl)
+			printf("%s", gnl);
+		else
+			printf("%s", "NULL");
 		free(gnl);
 	}
 	close(fd);

@@ -54,14 +54,14 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	length;
 
 	length = ft_strlen(s1);
+	if (!s1 || !s2)
+		return (NULL);
 	string = ft_calloc(length + ft_strlen(s2) + 1, sizeof(char));
-	if (string && s1 && s2)
-	{
-		ft_strlcpy(string, s1, length + 1);
-		while (*s2)
-			string[length++] = *s2++;
-		string[length] = '\0';
-	}
+	if (!string)
+		return (NULL);
+	ft_strlcpy(string, s1, length + 1);
+	while (*s2)
+		string[length++] = *s2++;
 	return (string);
 }
 
