@@ -65,7 +65,7 @@ char	*ft_getline(char *buffer)
 	while (*buffer != '\n' && *buffer)
 		line[index++] = *buffer++;
 	if (*buffer == '\n')
-		line[index] = '\n'; 
+		line[index] = '\n';
 	return (line);
 }
 
