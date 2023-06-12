@@ -20,11 +20,13 @@ char	*get_next_line(int fd);
 int	main(void)
 {
 	int		fd;
+  int   fd_two;
 	int		index;
 	char	*gnl;
 
-	fd = open("test", O_RDONLY);
-	index = 2;
+	fd = open("test.txt", O_RDONLY);
+  fd_two = open("test", O_RDONLY);
+	index = 9;
 	while (index--)
 	{
 		gnl = get_next_line(fd);
@@ -33,6 +35,12 @@ int	main(void)
 		else
 			printf("%s", "NULL");
 		free(gnl);
+    gnl = get_next_line(fd_two);
+    if (gnl)
+      printf("%s", gnl);
+    else
+      printf("%s", gnl);
+    free(gnl);
 	}
 	close(fd);
 }
