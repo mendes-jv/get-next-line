@@ -20,21 +20,17 @@
 #  define BUFFER_SIZE 42
 # endif
 
-// Mandatory
+// Get next line
 char	*get_next_line(int fd);
 char	*ft_buffertrim(char *buffer);
 char	*ft_getline(char *buffer);
 char	*ft_readline(int fd, char *temp_line);
 
-// Mandatory utils
+// Utils
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strchr(char *str, int c);
 char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlcpy(char *dst, char *src, size_t size);
 size_t	ft_strlen(char *str);
-
-// Bonus
-
-// Bonus utils
 
 #endif
