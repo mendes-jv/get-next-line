@@ -17,5 +17,5 @@ jobs:
           working-directory: .
       steps:
         - uses: actions/checkout@v2
-        - name: gcc -Wall -Werror -Wextra -D BUFFER_SIZE=42 src/mandatory/get_next_line.c src/mandatory/get_next_line_utils.c src/mandatory.c && ./a.out
-          run: gcc -Wall -Werror -Wextra -D BUFFER_SIZE=42 src/mandatory/get_next_line.c src/mandatory/get_next_line_utils.c src/mandatory.c && ./a.out
+        - name: gcc -Wall -Werror -Wextra -D BUFFER_SIZE=42 src/mandatory/get_next_line.c src/mandatory/get_next_line_utils.c src/main.c && ./a.out
+          run: gcc -Wall -Werror -Wextra -D BUFFER_SIZE=42 src/mandatory/get_next_line.c src/mandatory/get_next_line_utils.c src/main.c && ./a.out
