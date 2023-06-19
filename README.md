@@ -60,10 +60,10 @@ Or, if you want to test the bonus version of the functions (it's the same functi
 Now, when compiling your code, add the source files and the required flag:   
 
 ```sh
-[gcc | cc | clang] [flags] -D BUFFER_SIZE=xx get_next_line.c get_next_line_utils.c && ./a.out
+[gcc | cc | clang] [flags] -D BUFFER_SIZE=[some number greater than 0] get_next_line.c get_next_line_utils.c && ./a.out
 ```
 You can test the functions with the files provided by me in this respository using:
 
 ```sh
-gcc -Wall -Werror -Wextra -D BUFFER_SIZE=xx get_next_line.c get_next_line_utils.c main.c && ./a.out
+gcc -Wall -Werror -Wextra -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c main.c && ./a.out
 ```
