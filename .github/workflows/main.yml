@@ -1,0 +1,21 @@
+name: Norminette and Build
+on: [push, pull_request]
+
+jobs:
+  norminette:
+    name: Norminette
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: alexandregv/norminette-action@v3
+  build:
+      name: Build
+      needs: norminette
+      runs-on: ubuntu-latest
+      defaults:
+        run:
+          working-directory: .
+      steps:
+        - uses: actions/checkout@v2
+        - name: gcc -Wall -Werror -Wextra -D BUFFER_SIZE=xx get_next_line.c get_next_line_utils.c main.c && ./a.out
+          run: gcc -Wall -Werror -Wextra -D BUFFER_SIZE=xx get_next_line.c get_next_line_utils.c main.c && ./a.out
