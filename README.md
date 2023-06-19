@@ -2,12 +2,12 @@
 
 # Libft: Create you own C library.
 
-[![Norminette and Build](https://github.com/mendes-jv/get-next-line/actions/workflows/main.yml/badge.svg)](https://github.com/mendes-jv/get-next-line/actions/workflows/main.yml)
+[![Norminette and Build](https://github.com/mendes-jv/get-next-line/actions/workflows/main.yml/badge.svg(https://github.com/mendes-jv/get-next-line/actions/workflows/main.yml)
 ![42 São Paulo](https://img.shields.io/badge/42-SP-1E2952)
-![License](https://img.shields.io/github/license/mendes-jv/get-next-line?color=green)
-![Code size in bytes](https://img.shields.io/github/languages/code-size/mendes-jv/get-next-line?color=green)
-![Top language](https://img.shields.io/github/languages/top/mendes-jv/get-next-line?color=green)
-![Last commit](https://img.shields.io/github/last-commit/mendes-jv/get-next-line?color=green)
+![License](https://img.shields.io/github/license/mendes-jv/get-next-line?color=dark-green)
+![Code size in bytes](https://img.shields.io/github/languages/code-size/mendes-jv/get-next-line?color=dark-green)
+![Top language](https://img.shields.io/github/languages/top/mendes-jv/get-next-line?color=dark-green)
+![Last commit](https://img.shields.io/github/last-commit/mendes-jv/get-next-line?color=dark-green)
 
 </div>
 
