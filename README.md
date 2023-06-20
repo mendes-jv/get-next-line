@@ -1,6 +1,6 @@
 <div align = center>
 
-# Libft: Create you own C library.
+# Get Next Line: A C function that reads any valid file line by line until the end.
 
 [![Norminette and Build](https://github.com/mendes-jv/get-next-line/actions/workflows/main.yml/badge.svg)](https://github.com/mendes-jv/get-next-line/actions/workflows/main.yml)
 ![42 São Paulo](https://img.shields.io/badge/42-SP-1E2952)
@@ -58,10 +58,22 @@ Or, if you want to test the bonus version of the functions (it's the same functi
 Now, when compiling your code, add the source files and the required flag:   
 
 ```sh
-[gcc | cc | clang] [flags] -D BUFFER_SIZE=[number > 0] get_next_line.c get_next_line_utils.c && ./a.out
+[gcc | cc | clang] [flags] -D BUFFER_SIZE=[any number > 0] get_next_line.c get_next_line_utils.c && ./a.out
 ```
+Or, if you want to compile the bonus files:
+
+```sh
+[gcc | cc | clang] [flags] -D BUFFER_SIZE=[any number > 0] get_next_line_bonus.c get_next_line_utils_bonus.c && ./a.out
+```
+
 You can test the functions with the files provided by me in this respository using:
 
 ```sh
 gcc -Wall -Werror -Wextra -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c main.c && ./a.out
 ```
+Or
+
+```sh
+gcc -Wall -Werror -Wextra -D BUFFER_SIZE=42 get_next_line_bonus.c get_next_line_utils_bonus.c main.c && ./a.out
+```
+This functions is also avaliable to use at my other 42 project called [Libft](https://github.com/mendes-jv/libft).
