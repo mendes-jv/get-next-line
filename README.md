@@ -33,7 +33,7 @@ Get Next Line is the second project at 42 and it's a C function that returns a l
 
 ## The project:
 
-The line is, by definition, a string ending in "\n" (line break) or "EOF" (to the end of the file) and which, according to the subject, must be read in a buffer of a size defined in the compilation. get_next_line runs the read function and stores what was read during the call, only then it looks for a "\n" - when it finds it we know we've reached the end of the line, if it doesn't find the "\n" but read returns 0 we know that there is nothing ahead to be read (EOF), in other cases, we simply do not reach the end of the line, what was read is stored in the line that will be returned and we continue reading the file. Most of the time, the buffer does not match the exact size of the line, and it is also not possible to read the same stretch of the line two times, which creates one of the biggest problems in the development of get_next_line: What happens in those cases where, for example, the BUFFER_SIZE is 10 and the line ends at the 6th character? The 4 characters remaining after the line break would be lost and reading would continue into the next 10 character buffer.
+The line is, by definition, a string ending in "\n" (line break) or "EOF" (to the end of the file) and which, according to the subject, must be read in a buffer of a size defined in the compilation. get_next_line runs the read function and stores what was read during the call, only then it looks for a "\n" - when it finds it, we know we've reached the end of the line; if it doesn't find the "\n" but read returns 0, we know that there is nothing ahead to be read (EOF); in other cases, we simply do not reach the end of the line and what was read is stored in the line that will be returned, as we continue reading the file. Most of the time, the buffer does not match the exact size of the line and it is also not possible to read the same stretch of the line two times. This creates one of the biggest problems in the development of get_next_line: what happens in the cases where, for example, the BUFFER_SIZE is 10 and the line ends at the 6th character? The 4 characters remaining after the line break would be lost and reading would continue into the next 10 character buffer. But not in our implementation, as we solve this using a static variable.
 
 ## How to execute:
 
@@ -66,7 +66,7 @@ Or, if you want to compile the bonus files:
 [gcc | cc | clang] [flags] -D BUFFER_SIZE=[any number > 0] src/bonus/get_next_line_bonus.c src/bonus/get_next_line_utils_bonus.c && ./a.out
 ```
 
-You can test the functions with the files provided by me in this respository using:
+You can test the function with the files provided by me in this respository using:
 
 ```sh
 gcc -Wall -Werror -Wextra -D BUFFER_SIZE=42 src/mandatory/get_next_line.c src/mandatory/get_next_line_utils.c src/main.c && ./a.out
