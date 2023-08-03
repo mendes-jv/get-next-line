@@ -1,6 +1,6 @@
 <div align = center>
 
-# Get Next Line: A C function that reads any valid file line by line until the end.
+# Get Next Line: A C function that reads any valid file line by line until the end
 
 [![Norminette and Build](https://github.com/mendes-jv/get-next-line/actions/workflows/main.yml/badge.svg)](https://github.com/mendes-jv/get-next-line/actions/workflows/main.yml)
 ![42 São Paulo](https://img.shields.io/badge/42-SP-1E2952)
